@@ -53,6 +53,6 @@ HV9912_Ret_t HV9912_SetPhaseState(HV9912_Phase_State_t state, HV9912_Handle_t ha
 
 HV9912_Ret_t HV9912_GetPhaseState(HV9912_Handle_t handle, HV9912_Phase_State_t *pState);
 
-
+HV9912_Ret_t HV9912_SetDimmingDuty(uint8_t duty, HV9912_Handle_t handle);
 
 #endif//_HV9912_DRIVER_H
