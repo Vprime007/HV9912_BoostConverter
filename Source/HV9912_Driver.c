@@ -160,7 +160,12 @@ HV9912_Ret_t HV9912_AddDriver(HV9912_Config_t config, HV9912_Handle_t *pHandle){
         return HV9912_STATUS_ERROR;
     }
 
-    
+    HV9912_table[index].config = config;
+    HV9912_table[index].current_factor = 0;
+    HV9912_table[index].dim_duty = 0;
+    HV9912_table[index].phase_state = HV9912_PHASE_INVALID;
+    HV9912_table[index].active_flag = true;
+    *pHandle = index;
 
     return HV9912_STATUS_OK;
 }
@@ -180,6 +185,17 @@ HV9912_Ret_t HV9912_AddDriver(HV9912_Config_t config, HV9912_Handle_t *pHandle){
 *
 *******************************************************************************/
 HV9912_Ret_t HV9912_RemoveDriver(HV9912_Handle_t handle){
+
+    //Check if the params are valid
+    if(handle >= HV9912_CFG_MAX_NUM_OF_DEVICES){
+        return HV9912_STATUS_ERROR;
+    }
+
+    //Reset instance value to default
+    HV9912_table[handle].active_flag = false;
+    HV9912_table[handle].current_factor = 0;
+    HV9912_table[handle].dim_duty = 0;
+    HV9912_table[handle].phase_state = HV9912_PHASE_INVALID;
 
     return HV9912_STATUS_OK;
 }
@@ -213,6 +229,20 @@ HV9912_Ret_t HV9912_SetPhaseState(HV9912_Phase_State_t state, HV9912_Handle_t ha
     }
 
     //Set phase state via HV9912 cfg
+    if(state == HV9912_PHASE_ENABLE){
+        if(HV9912_CFG_STATUS_OK != HV9912_CFG_EnablePhase(&HV9912_table[handle].config)){
+            return HV9912_STATUS_ERROR;
+        }
+    }
+    else if(state == HV9912_PHASE_DISABLE){
+        if(HV9912_CFG_STATUS_OK != HV9912_CFG_DisablePhase(&HV9912_table[handle].config)){
+            return HV9912_STATUS_ERROR;
+        }
+    }
+    else{
+        //INVALID Phase state
+        return HV9912_STATUS_ERROR;
+    }
 
     //Update phase_state
     HV9912_table[handle].phase_state = state;
@@ -274,6 +304,10 @@ HV9912_Ret_t HV9912_SetDimmingDuty(uint32_t duty, HV9912_Handle_t handle){
     //Clip duty to max value
     if(duty > HV9912_CFG_MAX_DIM_DUTY)  duty = HV9912_CFG_MAX_DIM_DUTY;
 
+    if(HV9912_CFG_STATUS_OK != HV9912_CFG_SetDimmingDuty(duty, &HV9912_table[handle].config)){
+        return HV9912_STATUS_ERROR;
+    }
+
     //Update current value
     HV9912_table[handle].dim_duty = duty;
 
@@ -334,6 +368,10 @@ HV9912_Ret_t HV9912_SetCurrentRef(uint32_t ref_factor, HV9912_Handle_t handle){
 
     //Clip current ref factor
     if(ref_factor > HV9912_CFG_MAX_REF_FACTOR)  ref_factor = HV9912_CFG_MAX_REF_FACTOR;
+
+    if(HV9912_CFG_STATUS_OK != HV9912_CFG_SetCurrentRef(ref_factor, &HV9912_table[handle].config)){
+        return HV9912_STATUS_ERROR;
+    }
 
     //Update current value
     HV9912_table[handle].current_factor = ref_factor;

@@ -42,6 +42,15 @@ typedef enum HV9912_CFG_Ret_e{
 /******************************************************************************
 *   Public Functions
 *******************************************************************************/
+HV9912_CFG_Ret_t HV9912_CFG_SetupDevice(HV9912_Config_t *pConfig);
+
+HV9912_CFG_Ret_t HV9912_CFG_EnablePhase(HV9912_Config_t *pConfig);
+
+HV9912_CFG_Ret_t HV9912_CFG_DisablePhase(HV9912_Config_t *pConfig);
+
+HV9912_CFG_Ret_t HV9912_CFG_SetCurrentRef(uint32_t factor, HV9912_Config_t *pConfig);
+
+HV9912_CFG_Ret_t HV9912_CFG_SetDimmingDuty(uint32_t duty, HV9912_Config_t *pConfig);
 
 
 #endif//_HV9912_DRIVER_CFG_H

@@ -1,7 +1,7 @@
 /******************************************************************************
 *   Includes
 *******************************************************************************/
-
+#include "HV9912_Driver_cfg.h"
 
 /******************************************************************************
 *   Private Definitions
@@ -51,7 +51,30 @@
 /******************************************************************************
 *   Public Functions Definitions
 *******************************************************************************/
+HV9912_CFG_Ret_t HV9912_CFG_SetupDevice(HV9912_Config_t *pConfig){
 
+    return HV9912_CFG_STATUS_OK;
+}
+
+HV9912_CFG_Ret_t HV9912_CFG_EnablePhase(HV9912_Config_t *pConfig){
+
+    return HV9912_CFG_STATUS_OK;
+}
+
+HV9912_CFG_Ret_t HV9912_CFG_DisablePhase(HV9912_Config_t *pConfig){
+
+    return HV9912_CFG_STATUS_OK;
+}
+
+HV9912_CFG_Ret_t HV9912_CFG_SetCurrentRef(uint32_t factor, HV9912_Config_t *pConfig){
+
+    return HV9912_CFG_STATUS_OK;
+}
+
+HV9912_CFG_Ret_t HV9912_CFG_SetDimmingDuty(uint32_t duty, HV9912_Config_t *pConfig){
+
+    return HV9912_CFG_STATUS_OK;
+}
 
 /******************************************************************************
 *   Interrupts
