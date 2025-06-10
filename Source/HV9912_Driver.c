@@ -115,6 +115,15 @@ static uint8_t getFirstAvailableIndex(void){
 *******************************************************************************/
 HV9912_Ret_t HV9912_InitDriver(void){
 
+    //Init Driver instance table
+    for(uint8_t i=0; i<HV9912_CFG_MAX_NUM_OF_DEVICES; i++){
+        HV9912_table[i].active_flag = 0;
+        HV9912_table[i].current_factor = 0;
+        HV9912_table[i].dim_duty = 0;
+        HV9912_table[i].phase_state = HV9912_PHASE_DISABLE;
+        //HV9912_table[i].config ....
+    }
+
     return HV9912_STATUS_OK;
 }
 
@@ -127,12 +136,31 @@ HV9912_Ret_t HV9912_InitDriver(void){
 *
 *   Side Effects: None.
 *
+*   \param[in]  config              Driver configuration.
 *   \param[in]  pHandle             Pointer to store instance handle.
 *
 *   \return     operation status
 *
 *******************************************************************************/
-HV9912_Ret_t HV9912_AddDriver(HV9912_Handle_t *pHandle){
+HV9912_Ret_t HV9912_AddDriver(HV9912_Config_t config, HV9912_Handle_t *pHandle){
+
+    //Check if params are valid
+    if(pHandle == NULL){
+        return HV9912_STATUS_ERROR;
+    }
+
+    //Check if table is full of instance
+    if(isTableFull()){
+        return HV9912_STATUS_ERROR;
+    }
+
+    //Get first available index
+    uint8_t index = getFirstAvailableIndex();
+    if(index == INVALID_TABLE_INDEX){
+        return HV9912_STATUS_ERROR;
+    }
+
+    
 
     return HV9912_STATUS_OK;
 }

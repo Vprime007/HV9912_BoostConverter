@@ -18,7 +18,7 @@
 /******************************************************************************
 *   Public Data Types
 *******************************************************************************/
-typedef uint8_t                 (HV9912_Handle_t);
+typedef uint8_t                     (HV9912_Handle_t);
 
 typedef enum HV9912_Phase_State_e{
     HV9912_PHASE_DISABLE = 0,
@@ -68,12 +68,13 @@ HV9912_Ret_t HV9912_InitDriver(void);
 *
 *   Side Effects: None.
 *
+*   \param[in]  config              Driver configuration.
 *   \param[in]  pHandle             Pointer to store instance handle.
 *
 *   \return     operation status
 *
 *******************************************************************************/
-HV9912_Ret_t HV9912_AddDriver(HV9912_Handle_t *pHandle);
+HV9912_Ret_t HV9912_AddDriver(HV9912_Config_t config, HV9912_Handle_t *pHandle);
 
 /***************************************************************************//*!
 *  \brief Remove HV9912 driver instance.
