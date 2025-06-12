@@ -139,6 +139,11 @@ HV9912_CFG_Ret_t HV9912_CFG_DisablePhase(HV9912_Config_t *pConfig){
 *******************************************************************************/
 HV9912_CFG_Ret_t HV9912_CFG_SetCurrentRef(uint32_t factor, HV9912_Config_t *pConfig){
 
+    /*Populate this function based on the hardware used (ie. MCU).
+    This function should set the reference current of a Hv9912 instance. 
+    The reference signal is analog an go form 0v(Lowest currrent) to 
+    3v3(Highest current). All variables/infos needed should be in pConfig.*/
+
     return HV9912_CFG_STATUS_OK;
 }
 /***************************************************************************//*!
@@ -158,6 +163,12 @@ HV9912_CFG_Ret_t HV9912_CFG_SetCurrentRef(uint32_t factor, HV9912_Config_t *pCon
 *
 *******************************************************************************/
 HV9912_CFG_Ret_t HV9912_CFG_SetDimmingDuty(uint32_t duty, HV9912_Config_t *pConfig){
+
+    /*Populate this function based on the hardware used (ie. MCU).
+    This function should set the Dimming duty cycle of a Hv9912 instance. 
+    The reference signal is a PWM of arbitrary frequency and resolution.
+    For higher duty cycle -> Higher brightness / Lower duty-cycle -> Lower brightness.
+    All variables/infos needed should be in pConfig.*/
 
     return HV9912_CFG_STATUS_OK;
 }
