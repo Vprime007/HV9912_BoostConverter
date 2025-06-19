@@ -1,7 +1,7 @@
 #ifndef _HV9912_DRIVER_H
 #define _HV9912_DRIVER_H
 
-#include "HV9912_Driver_cfg.h"
+#include "config/HV9912_Driver_cfg.h"
 
 #include <stdint.h>
 
